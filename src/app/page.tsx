@@ -2,9 +2,11 @@ import Header from '@/components/layout/Header';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import ProjectsClient from '@/components/sections/ProjectsClient';
+import Experience from '@/components/sections/Experience';
 import Contact from '@/components/sections/Contact';
 import { personalInfo, navigation, aboutInfo } from '@/data/personal';
 import { projects } from '@/data/projects';
+import { experiences } from '@/data/experience';
 
 /**
  * Página principal del portafolio personal
@@ -93,8 +95,10 @@ export default function Home() {
           {/* Grid de habilidades - Datos hardcodeados temporalmente */}
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {[
-              'React', 'Next.js', 'TypeScript', 'Node.js', 
-              'PostgreSQL', 'Tailwind CSS', 'Docker', 'Git'
+              'Python', 'Django', 'React', 'Angular', 
+              'PostgreSQL', 'Docker', 'Azure Cloud', 'PyTorch',
+              'YOLO', 'OpenCV', 'Flask', 'JavaScript',
+              'CSS', 'HTML', 'Linux', 'Git'
             ].map((skill) => (
               <div key={skill} className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm text-center">
                 {/* Icono temporal - TODO: Reemplazar por iconos específicos */}
@@ -107,56 +111,12 @@ export default function Home() {
       </section>
 
       {/* 
-        EXPERIENCE SECTION - TEMPORAL
-        Sección de experiencia profesional con formato de timeline.
-        
-        TODO: Migrar a un componente separado (Experience.tsx)
-        TODO: Cargar datos desde @/data/experience.ts
-        TODO: Implementar timeline completo para múltiples experiencias
-        TODO: Añadir logos de empresas
-        
-        Actualmente muestra solo una experiencia de ejemplo (Freelance).
-        Diseño responsive con tarjeta destacada y avatar inicial.
+        EXPERIENCE SECTION
+        Sección de experiencia profesional con timeline interactivo.
+        Renderiza todas las experiencias desde @/data/experience.ts
+        Incluye responsabilidades, logros y tecnologías para cada posición.
       */}
-      <section id="experience" className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Título de la sección */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Experiencia Profesional
-            </h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full" />
-          </div>
-          
-          {/* Container de experiencias - Actualmente solo una */}
-          <div className="max-w-4xl mx-auto">
-            {/* Tarjeta de experiencia individual */}
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
-              <div className="flex items-start gap-4">
-                {/* Avatar/Logo de la empresa - Temporal con inicial */}
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
-                  D
-                </div>
-                
-                {/* Contenido de la experiencia */}
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    Desarrollador Full Stack
-                  </h3>
-                  <p className="text-blue-600 dark:text-blue-400 font-medium">
-                    Freelance • 2021 - Presente
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-300 mt-2">
-                    Desarrollo de aplicaciones web completas utilizando tecnologías modernas como 
-                    React, Next.js, TypeScript y Node.js. Experiencia trabajando con clientes 
-                    internacionales y proyectos de diferentes escalas.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Experience experiences={experiences} />
 
       {/* 
         CONTACT SECTION
