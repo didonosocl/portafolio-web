@@ -28,13 +28,6 @@ export const experiences: Experience[] = [
       'Uso de Clean Architecture y patrones de diseño empresariales'
     ],
     
-    achievements: [
-      'Implementación exitosa de módulo IEH',
-      'Mejora continua de infraestructura TI',
-      'Resolución eficiente de incidencias críticas',
-      'Aplicación de Clean Architecture en proyectos'
-    ],
-    
     technologies: [
       'ASP .NET CORE 3', 'Angular 14', 'CSS', 'HTML'
     ]
@@ -62,13 +55,6 @@ export const experiences: Experience[] = [
       'Consultas a incidencias, requerimientos y consultas'
     ],
     
-    achievements: [
-      'Gestión exitosa de múltiples proyectos simultáneos',
-      'Mejora en tiempos de resolución de incidencias',
-      'Implementación de soluciones escalables',
-      'Soporte técnico especializado en sistemas críticos'
-    ],
-    
     technologies: [
       'Python', 'Django', 'Docker', 'PostgreSQL', 'Flask', 'Linux'
     ]
@@ -76,8 +62,8 @@ export const experiences: Experience[] = [
   {
     id: '3',
     position: 'Desarrollador de Software',
-    company: 'Blue Latam',
-    companyLogo: '/images/companies/blue-latam-logo.png',
+    company: 'Deliryum',
+    companyLogo: '/images/companies/deliryum-logo.jpg',
     location: 'Santiago, Chile',
     type: 'full-time' as EmploymentType,
     startDate: '2023-02-01', // Febrero 2023 - Julio 2023
@@ -96,13 +82,6 @@ export const experiences: Experience[] = [
       'Construcción de APIs con librerías como Axios y Fetch'
     ],
     
-    achievements: [
-      'Implementación exitosa de sistemas de videanalítica',
-      'Liderazgo efectivo de equipo técnico',
-      'Desarrollo de soluciones escalables con Docker',
-      'Integración exitosa de múltiples tecnologías de IA'
-    ],
-    
     technologies: [
       'Python', 'React JS', 'Azure Cloud', 'YoloV5', 'Cors', 'Google Colab', 'Miniconda',
       'YOLO', 'Darknet', 'PyTorch', 'TensorFlow', 'Docker', 'FastAPI', 'Django'
@@ -111,8 +90,8 @@ export const experiences: Experience[] = [
   {
     id: '4',
     position: 'Programador Junior',
-    company: 'Blue Latam',
-    companyLogo: '/images/companies/blue-latam-logo.png',
+    company: 'Deliryum',
+    companyLogo: '/images/companies/deliryum-logo.jpg',
     location: 'Santiago, Chile',
     type: 'full-time' as EmploymentType,
     startDate: '2022-02-01', // Febrero 2022 - Febrero 2023
@@ -130,13 +109,6 @@ export const experiences: Experience[] = [
       'Uso de OpenCV para control de accesos en imágenes y videos'
     ],
     
-    achievements: [
-      'Procesamiento exitoso de grandes volúmenes de datos',
-      'Optimización de modelos de Deep Learning',
-      'Implementación en la nube con Azure',
-      'Desarrollo de soluciones de computer vision'
-    ],
-    
     technologies: [
       'OpenCV', 'Labelme', 'Labeling', 'Roboflow', 'Azure Cloud', 'Google Colab',
       'Python', 'Deep Learning', 'Computer Vision'
@@ -145,8 +117,8 @@ export const experiences: Experience[] = [
   {
     id: '5',
     position: 'Práctica',
-    company: 'Blue Latam',
-    companyLogo: '/images/companies/blue-latam-logo.png',
+    company: 'Deliryum',
+    companyLogo: '/images/companies/deliryum-logo.jpg',
     location: 'Santiago, Chile',
     type: 'internship' as EmploymentType,
     startDate: '2021-10-01', // Octubre 2021 - Enero 2022
@@ -164,37 +136,11 @@ export const experiences: Experience[] = [
       'Implementación de mejores prácticas de desarrollo web'
     ],
     
-    achievements: [
-      'Desarrollo exitoso de interfaces de usuario',
-      'Integración efectiva de APIs con frontend',
-      'Aprendizaje acelerado de tecnologías web',
-      'Contribución significativa en proyectos del equipo'
-    ],
-    
     technologies: [
       'HTML', 'CSS', 'Bootstrap', 'React JS', 'Vue', 'VueHfy', 'Flask', 'Django',
       'JavaScript', 'APIs REST', 'Bases de datos'
     ]
   }
-  
-  // TODO: Añadir más experiencias basadas en el CV real
-  // Ejemplo para añadir más experiencias:
-  /*
-  {
-    id: '2',
-    position: 'Frontend Developer',
-    company: 'Tech Company',
-    location: 'Madrid, España',
-    type: 'full-time' as EmploymentType,
-    startDate: '2020-06-01',
-    endDate: '2020-12-31',
-    description: 'Descripción del rol...',
-    responsibilities: ['...'],
-    achievements: ['...'],
-    technologies: ['...'],
-    companyLogo: '/images/companies/tech-company.png'
-  }
-  */
 ];
 
 /**
