@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Container, Section } from '@/components/ui/Container';
 import { Card, Badge, Button } from '@/components/ui/Button';
+import { OptimizedProjectImage } from '@/components/ui/OptimizedProjectImage';
 import { Project, ProjectCategory } from '@/types';
 
 interface ProjectsProps {
@@ -26,10 +27,8 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   const categoryLabels: Record<ProjectCategory | 'all', string> = {
     all: 'Todos',
     'web-app': 'Web Apps',
-    'mobile-app': 'Apps Móviles',
     'desktop-app': 'Apps Desktop',
     'api': 'APIs',
-    'library': 'Librerías',
     'tool': 'Herramientas',
     'design': 'Diseño',
     'other': 'Otros'
@@ -76,12 +75,11 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
       onClick={() => setSelectedProject(project)}
     >
       {/* Project Image */}
-      <div className="relative overflow-hidden rounded-lg mb-4">
-        <img
+      <div className="relative">
+        <OptimizedProjectImage
           src={project.image}
           alt={project.title}
-          className={`w-full object-cover transition-transform duration-300 
-                    group-hover:scale-105 ${featured ? 'h-64' : 'h-48'}`}
+          featured={featured}
         />
         <div className="absolute top-4 right-4">
           {getStatusBadge(project.status)}
@@ -186,7 +184,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
         )}
 
         {/* Other Projects */}
-        {otherProjects.length > 0 && (
+        {/* {otherProjects.length > 0 && (
           <div>
             {featuredProjects.length > 0 && (
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
@@ -207,7 +205,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
               No se encontraron proyectos en esta categoría.
             </p>
           </div>
-        )}
+        )} */}
 
       </Container>
 
@@ -231,29 +229,23 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
               </Button>
             </div>
             
-            <img
-              src={selectedProject.image}
-              alt={selectedProject.title}
-              className="w-full h-64 object-cover rounded-lg mb-6"
-            />
+            <div className="relative overflow-hidden rounded-lg mb-6 bg-gray-100 dark:bg-gray-800">
+              <img
+                src={selectedProject.image}
+                alt={selectedProject.title}
+                className="w-full h-64 object-contain"
+                loading="lazy"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = '/images/placeholder-project.png';
+                }}
+              />
+            </div>
             
             <div className="space-y-4">
               <p className="text-gray-600 dark:text-gray-300">
                 {selectedProject.longDescription || selectedProject.description}
               </p>
-              
-              {selectedProject.challenges && (
-                <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                    Desafíos:
-                  </h4>
-                  <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
-                    {selectedProject.challenges.map((challenge, index) => (
-                      <li key={index}>{challenge}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
               
               <div className="flex flex-wrap gap-2">
                 {selectedProject.technologies.map((tech) => (
