@@ -27,6 +27,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   const categoryLabels: Record<ProjectCategory | 'all', string> = {
     all: 'Todos',
     'web-app': 'Web Apps',
+    'spa': 'Single Page Apps',
     'desktop-app': 'Apps Desktop',
     'api': 'APIs',
     'tool': 'Herramientas',
