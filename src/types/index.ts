@@ -45,7 +45,6 @@ export interface Project {
   dateCompleted: string;
   duration?: string;
   team?: TeamMember[];
-  challenges?: string[];
   learnings?: string[];
 }
 
