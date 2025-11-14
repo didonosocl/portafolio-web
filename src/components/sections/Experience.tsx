@@ -93,7 +93,7 @@ function ExperienceCard({ experience, isLast }: ExperienceCardProps) {
               <img
                 src={experience.companyLogo}
                 alt={`Logo de ${experience.company}`}
-                className="w-12 h-12 rounded-lg object-cover"
+                className="w-16 h-16 object-contain"
               />
             ) : (
               <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
@@ -161,23 +161,6 @@ function ExperienceCard({ experience, isLast }: ExperienceCardProps) {
                     <li key={index} className="flex items-start">
                       <span className="text-blue-600 mr-2 mt-1.5">•</span>
                       <span>{responsibility}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Logros */}
-            {experience.achievements && experience.achievements.length > 0 && (
-              <div className="mb-4">
-                <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                  Logros destacados:
-                </h4>
-                <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
-                  {experience.achievements.map((achievement, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="text-green-600 mr-2 mt-1.5">✓</span>
-                      <span>{achievement}</span>
                     </li>
                   ))}
                 </ul>
