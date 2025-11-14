@@ -2,23 +2,26 @@
 
 import { Experience as ExperienceType, Position } from '@/types';
 import { formatExperienceDate, calculateDuration } from '@/data/experience';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ExperienceProps {
   experiences: ExperienceType[];
 }
 
 export default function Experience({ experiences }: ExperienceProps) {
+  const { t } = useLanguage();
+  
   return (
     <section id="experience" className="py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Título de la sección */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Experiencia Profesional
+            {t('experience.title')}
           </h2>
           <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full" />
           <p className="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
-            Mi trayectoria profesional en desarrollo de software
+            {t('experience.subtitle') || 'Mi trayectoria profesional en desarrollo de software'}
           </p>
         </div>
 
@@ -45,11 +48,12 @@ interface ExperienceCardProps {
 }
 
 function ExperienceCard({ experience, isLast }: ExperienceCardProps) {
+  const { t } = useLanguage();
   const totalDuration = calculateDuration(experience.totalStartDate, experience.totalEndDate);
   const totalStartDate = formatExperienceDate(experience.totalStartDate);
   const totalEndDate = experience.totalEndDate 
     ? formatExperienceDate(experience.totalEndDate) 
-    : 'Presente';
+    : t('experience.present');
 
   return (
     <div className="relative">
@@ -101,9 +105,9 @@ function ExperienceCard({ experience, isLast }: ExperienceCardProps) {
                     📍 {experience.location}
                     {experience.workMode && (
                       <span className="ml-2">
-                        · {experience.workMode === 'remote' ? 'En remoto' : 
-                           experience.workMode === 'hybrid' ? 'Híbrido' : 
-                           'Presencial'}
+                        · {experience.workMode === 'remote' ? t('experience.remote') : 
+                           experience.workMode === 'hybrid' ? t('experience.hybrid') : 
+                           t('experience.onsite')}
                       </span>
                     )}
                   </p>
@@ -143,11 +147,12 @@ interface PositionCardProps {
 }
 
 function PositionCard({ position, isFirst }: PositionCardProps) {
+  const { t } = useLanguage();
   const duration = calculateDuration(position.startDate, position.endDate);
   const startDate = formatExperienceDate(position.startDate);
   const endDate = position.endDate 
     ? formatExperienceDate(position.endDate) 
-    : 'Presente';
+    : t('experience.present');
 
   const getEmploymentTypeColor = (type: string) => {
     const colors = {
@@ -161,14 +166,7 @@ function PositionCard({ position, isFirst }: PositionCardProps) {
   };
 
   const getEmploymentTypeLabel = (type: string) => {
-    const labels = {
-      'full-time': 'Jornada completa',
-      'freelance': 'Freelance',
-      'part-time': 'Medio tiempo',
-      'contract': 'Contrato',
-      'internship': 'Prácticas'
-    };
-    return labels[type as keyof typeof labels] || type;
+    return t(`experience.employmentType.${type}`) || type;
   };
 
   return (
@@ -198,42 +196,47 @@ function PositionCard({ position, isFirst }: PositionCardProps) {
 
       {/* Descripción */}
       <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-        {position.description}
+        {t(`experience.positions.${position.id}.description`) || position.description}
       </p>
 
       {/* Proyectos (si existen) */}
       {position.projects && position.projects.length > 0 && (
         <div className="mb-4 space-y-3">
-          {position.projects.map((project, projIdx) => (
-            <div
-              key={projIdx}
-              className="pl-4 border-l-2 border-blue-300 dark:border-blue-700 bg-blue-50/30 dark:bg-blue-900/10 rounded-r-lg p-3"
-            >
-              <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
-                📋 Proyecto: {project.name}
-              </h5>
-              {project.period && (
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                  📅 {project.period}
+          {position.projects.map((project, projIdx) => {
+            const projectKey = (project as any).key || '';
+            const projectData = projectKey ? (t(`experience.projects.${projectKey}`) as any) : null;
+            
+            return (
+              <div
+                key={projIdx}
+                className="pl-4 border-l-2 border-blue-300 dark:border-blue-700 bg-blue-50/30 dark:bg-blue-900/10 rounded-r-lg p-3"
+              >
+                <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+                  📋 {t('experience.project')}: {projectData?.name || project.name}
+                </h5>
+                {(projectData?.period || project.period) && (
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                    📅 {projectData?.period || project.period}
+                  </p>
+                )}
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                  {projectData?.description || project.description}
                 </p>
-              )}
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                {project.description}
-              </p>
-              {project.technologies && project.technologies.length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {project.technologies.map((tech, techIdx) => (
-                    <span
-                      key={techIdx}
-                      className="px-2 py-0.5 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded text-xs border border-gray-200 dark:border-gray-700"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+                {project.technologies && project.technologies.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.technologies.map((tech, techIdx) => (
+                      <span
+                        key={techIdx}
+                        className="px-2 py-0.5 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded text-xs border border-gray-200 dark:border-gray-700"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -241,10 +244,10 @@ function PositionCard({ position, isFirst }: PositionCardProps) {
       {position.responsibilities && position.responsibilities.length > 0 && (
         <div className="mb-4">
           <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-            Responsabilidades:
+            {t('experience.responsibilities')}
           </h5>
           <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1.5">
-            {position.responsibilities.map((responsibility, index) => (
+            {(t(`experience.positions.${position.id}.responsibilities`) as unknown as string[] || position.responsibilities).map((responsibility, index) => (
               <li key={index} className="flex items-start">
                 <span className="text-blue-600 dark:text-blue-400 mr-2 mt-0.5 flex-shrink-0">•</span>
                 <span>{responsibility}</span>
@@ -258,7 +261,7 @@ function PositionCard({ position, isFirst }: PositionCardProps) {
       {position.technologies && position.technologies.length > 0 && (
         <div>
           <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-            Tecnologías:
+            {t('experience.technologies')}
           </h5>
           <div className="flex flex-wrap gap-2">
             {position.technologies.map((tech) => (

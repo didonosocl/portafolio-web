@@ -33,18 +33,21 @@ export const experiences: Experience[] = [
         technologies: ['ASP .NET CORE 4.6.1', 'ASP .NET CORE 9', 'Angular 15', 'PostgreSQL', 'PHP', 'JavaScript', 'CSS', 'HTML'],
         projects: [
           {
+            key: 'pmgd-netbilling',
             name: 'PMGD - NetBilling',
             period: 'octubre 2025 - Actualidad',
             description: 'Migración de base de datos de proyecto GeneradorKMZ. De ORACLE a PostgreSQL.',
             technologies: ['ASP .NET CORE 4.6.1', 'PostgreSQL']
           },
           {
+            key: 'enel',
             name: 'ENEL',
             period: 'mayo 2025 - Actualidad',
             description: 'Soporte y mantenimiento de sistema informático, proyecto Plataforma Gestión de Emergencias PGE, participando en la creación de módulo \'IEH\', resolución de incidencias y mejora continua de la infraestructura TI / aplicativo. Uso de Clean Architecture y patrón de diseño Mediator',
             technologies: ['ASP .NET CORE 9', 'Angular 15', 'CSS', 'HTML']
           },
           {
+            key: 'codelco',
             name: 'Codelco',
             period: 'enero 2025 - Actualidad',
             description: 'Soporte y mantenimiento de sistema informático, proyecto SIC3PRO, participando en la creación de módulo \'PIE\', resolución de incidencias y mejora continua de la infraestructura TI / aplicativo.',
@@ -68,6 +71,7 @@ export const experiences: Experience[] = [
         technologies: ['Python', 'Django', 'Flask', 'Docker', 'Git', 'MongoDB', 'MySQL', 'Nginx', 'CSS', 'HTML', 'JavaScript'],
         projects: [
           {
+            key: 'cen',
             name: 'Coordinador Eléctrico Nacional - CEN',
             period: 'agosto 2023 - diciembre 2024',
             description: 'Soporte y mantenimiento de sistemas informáticos en diversas áreas (full stack), abarcando proyectos como Sistema de Correspondencia, Operación Real, Plataforma de Gestión de Proyectos (PGP), Neomante y Estados Operativos. Atención de requerimientos, resolución de tickets incidencias y mejora continua de la infraestructura TI.',

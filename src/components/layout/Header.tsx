@@ -5,6 +5,7 @@ import { Container } from '@/components/ui/Container';
 import { NavigationItem } from '@/types';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/components/theme-provider';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface HeaderProps {
   navigation: NavigationItem[];
@@ -25,6 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({
                 "font-medium text-sm"
               )}
             >
-              Sobre mí
+              {t('nav.about')}
             </button>
             <button
               onClick={() => scrollToSection('#experience')}
@@ -89,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({
                 "font-medium text-sm"
               )}
             >
-              Experiencia
+              {t('nav.experience')}
             </button>
             <button
               onClick={() => scrollToSection('#skills')}
@@ -99,7 +101,7 @@ export const Header: React.FC<HeaderProps> = ({
                 "font-medium text-sm"
               )}
             >
-              Habilidades
+              {t('nav.skills')}
             </button>
             <button
               onClick={() => scrollToSection('#projects')}
@@ -109,7 +111,7 @@ export const Header: React.FC<HeaderProps> = ({
                 "font-medium text-sm"
               )}
             >
-              Proyectos
+              {t('nav.projects')}
             </button>
             <button
               onClick={() => scrollToSection('#contact')}
@@ -119,12 +121,28 @@ export const Header: React.FC<HeaderProps> = ({
                 "font-medium text-sm"
               )}
             >
-              Contacto
+              {t('nav.contact')}
             </button>
           </div>
 
-          {/* Theme Toggle & Mobile Menu Button */}
+          {/* Language Toggle, Theme Toggle & Mobile Menu Button */}
           <div className="flex items-center gap-4">
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
+              className={cn(
+                "p-2 rounded-lg text-gray-700 hover:text-blue-600",
+                "dark:text-gray-300 dark:hover:text-blue-400",
+                "hover:bg-gray-100 dark:hover:bg-gray-800",
+                "transition-colors duration-200 font-semibold text-sm"
+              )}
+              aria-label="Toggle language"
+              title={`Idioma: ${language === 'es' ? 'Español' : 'English'}`}
+            >
+              {language === 'es' ? '🇺🇸 EN' : '🇪🇸 ES'}
+            </button>
+
+            {/* Theme Toggle */}
             <button
               onClick={() => {
                 // Ciclo: system -> light -> dark -> system
@@ -229,7 +247,7 @@ export const Header: React.FC<HeaderProps> = ({
                          hover:bg-gray-100 dark:hover:bg-gray-800
                          transition-colors duration-200 font-medium"
               >
-                Sobre mí
+                {t('nav.about')}
               </button>
               <button
                 onClick={() => scrollToSection('#experience')}
@@ -238,7 +256,7 @@ export const Header: React.FC<HeaderProps> = ({
                          hover:bg-gray-100 dark:hover:bg-gray-800
                          transition-colors duration-200 font-medium"
               >
-                Experiencia
+                {t('nav.experience')}
               </button>
               <button
                 onClick={() => scrollToSection('#skills')}
@@ -247,7 +265,7 @@ export const Header: React.FC<HeaderProps> = ({
                          hover:bg-gray-100 dark:hover:bg-gray-800
                          transition-colors duration-200 font-medium"
               >
-                Habilidades
+                {t('nav.skills')}
               </button>
               <button
                 onClick={() => scrollToSection('#projects')}
@@ -256,7 +274,7 @@ export const Header: React.FC<HeaderProps> = ({
                          hover:bg-gray-100 dark:hover:bg-gray-800
                          transition-colors duration-200 font-medium"
               >
-                Proyectos
+                {t('nav.projects')}
               </button>
               <button
                 onClick={() => scrollToSection('#contact')}
@@ -265,7 +283,7 @@ export const Header: React.FC<HeaderProps> = ({
                          hover:bg-gray-100 dark:hover:bg-gray-800
                          transition-colors duration-200 font-medium"
               >
-                Contacto
+                {t('nav.contact')}
               </button>
             </div>
           </div>

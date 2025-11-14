@@ -126,6 +126,7 @@ export type SkillLevel =
  * Proyecto dentro de una posición
  */
 export interface WorkProject {
+  key?: string; // Clave para traducción
   name: string;
   period?: string; // ej: "octubre 2025 - Actualidad"
   description: string;

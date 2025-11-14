@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Container, Section } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { PersonalInfo, ContactFormData } from '@/types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ContactProps {
   personalInfo: PersonalInfo;
@@ -13,6 +14,8 @@ interface ContactProps {
  * Sección de Contacto con formulario funcional
  */
 export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
+  const { t } = useLanguage();
+  
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
@@ -65,10 +68,10 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
       <Container>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            ¡Hablemos!
+            {t('contact.title')}
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-            ¿Tienes un proyecto en mente? Me encantaría saber más
+            {t('contact.subtitle')}
           </p>
           <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full" />
         </div>
@@ -79,7 +82,7 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
           <div className="space-y-8">
             <div>
               <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-                Información de Contacto
+                {t('contact.info.title')}
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
@@ -87,7 +90,7 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
                     📧
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900 dark:text-white">Email</p>
+                    <p className="font-medium text-gray-900 dark:text-white">{t('contact.info.email')}</p>
                     <a href={`mailto:${personalInfo.email}`} 
                        className="text-blue-600 dark:text-blue-400 hover:underline">
                       {personalInfo.email}
@@ -101,7 +104,7 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
                       📱
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900 dark:text-white">Teléfono</p>
+                      <p className="font-medium text-gray-900 dark:text-white">{t('contact.info.phone')}</p>
                       <a href={`tel:${personalInfo.phone}`} 
                          className="text-blue-600 dark:text-blue-400 hover:underline">
                         {personalInfo.phone}
@@ -115,7 +118,7 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
                     📍
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900 dark:text-white">Ubicación</p>
+                    <p className="font-medium text-gray-900 dark:text-white">{t('contact.info.location')}</p>
                     <p className="text-gray-600 dark:text-gray-300">{personalInfo.location}</p>
                   </div>
                 </div>
@@ -125,7 +128,7 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
             {/* Social Links */}
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
-                Sígueme en redes
+                {t('contact.info.social')}
               </h4>
               <div className="flex gap-4">
                 {personalInfo.socialLinks.map((link) => (
@@ -149,11 +152,11 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
             {/* Quick Stats */}
             <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
               <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
-                Tiempo de respuesta
+                {t('contact.info.responseTime')}
               </h4>
               <div className="flex items-center gap-2 text-green-600 dark:text-green-400">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium">Usualmente respondo en 24 horas</span>
+                <span className="text-sm font-medium">{t('contact.info.responseMessage')}</span>
               </div>
             </div>
           </div>
@@ -161,13 +164,13 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
           {/* Contact Form */}
           <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm">
             <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-              Envíame un mensaje
+              {t('contact.form.title')}
             </h3>
 
             {submitStatus === 'success' && (
               <div className="mb-6 p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-lg">
                 <p className="text-green-800 dark:text-green-200 font-medium">
-                  ¡Mensaje enviado exitosamente! Te responderé pronto.
+                  {t('contact.success')}
                 </p>
               </div>
             )}
@@ -175,7 +178,7 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
             {submitStatus === 'error' && (
               <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-lg">
                 <p className="text-red-800 dark:text-red-200 font-medium">
-                  Hubo un error al enviar el mensaje. Inténtalo nuevamente.
+                  {t('contact.error')}
                 </p>
               </div>
             )}
@@ -184,7 +187,7 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Nombre *
+                    {t('contact.name')} *
                   </label>
                   <input
                     type="text"
@@ -196,13 +199,13 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 
                              rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent
                              bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    placeholder="Tu nombre"
+                    placeholder={t('contact.form.namePlaceholder')}
                   />
                 </div>
                 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Email *
+                    {t('contact.email')} *
                   </label>
                   <input
                     type="email"
@@ -214,7 +217,7 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 
                              rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent
                              bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    placeholder="tu@email.com"
+                    placeholder={t('contact.form.emailPlaceholder')}
                   />
                 </div>
               </div>
@@ -222,7 +225,7 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Empresa (opcional)
+                    {t('contact.form.company')}
                   </label>
                   <input
                     type="text"
@@ -233,13 +236,13 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 
                              rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent
                              bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    placeholder="Tu empresa"
+                    placeholder={t('contact.form.companyPlaceholder')}
                   />
                 </div>
                 
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Teléfono (opcional)
+                    {t('contact.form.phone')}
                   </label>
                   <input
                     type="tel"
@@ -250,14 +253,14 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 
                              rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent
                              bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    placeholder="+34 123 456 789"
+                    placeholder={t('contact.form.phonePlaceholder')}
                   />
                 </div>
               </div>
               
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Asunto *
+                  {t('contact.subject')} *
                 </label>
                 <input
                   type="text"
@@ -269,13 +272,13 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 
                            rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent
                            bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                  placeholder="Sobre qué quieres hablar?"
+                  placeholder={t('contact.form.subjectPlaceholder')}
                 />
               </div>
               
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Mensaje *
+                  {t('contact.message')} *
                 </label>
                 <textarea
                   id="message"
@@ -287,7 +290,7 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 
                            rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent
                            bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
-                  placeholder="Cuéntame sobre tu proyecto, idea o simplemente salúdame..."
+                  placeholder={t('contact.form.messagePlaceholder')}
                 ></textarea>
               </div>
               
@@ -298,7 +301,7 @@ export const Contact: React.FC<ContactProps> = ({ personalInfo }) => {
                 disabled={!formData.name || !formData.email || !formData.subject || !formData.message}
                 className="w-full"
               >
-                {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+                {isSubmitting ? t('contact.sending') : t('contact.send')}
               </Button>
             </form>
           </div>
