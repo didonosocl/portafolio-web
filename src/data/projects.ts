@@ -6,6 +6,57 @@ import { Project } from '@/types';
  */
 export const projects: Project[] = [
   {
+    id: 'portafolio-personal',
+    title: 'Portafolio Web Personal',
+    description: 'Portafolio profesional moderno desarrollado con Next.js 16, React 19 y Tailwind CSS v4, con sistema de temas y optimización SEO.',
+    longDescription: `
+      Sitio web portafolio personal de una sola página (SPA) desarrollado con las últimas tecnologías web.
+      Construido con Next.js 16 usando App Router, React 19 y Tailwind CSS v4 para un rendimiento óptimo
+      y experiencia de usuario superior.
+      
+      Características principales: arquitectura de componentes modular y reutilizable, sistema completo
+      de temas (claro/oscuro/sistema) con persistencia en localStorage, diseño responsive optimizado para
+      todos los dispositivos, navegación fluida entre secciones con scroll suave, optimización de imágenes
+      automática con Next.js Image, y componente NoSSR para prevenir problemas de hidratación.
+      
+      Implementa mejores prácticas de desarrollo: TypeScript para type safety completo, componentes
+      documentados con JSDoc, estructura de archivos clara y escalable, CSS modular con Tailwind v4
+      usando directivas @import y @variant, y optimización SEO con metadata dinámica. Incluye secciones
+      para presentación personal, habilidades técnicas con 18 tecnologías e íconos SVG oficiales,
+      experiencia laboral, proyectos destacados y formulario de contacto.
+    `,
+    image: '/images/projects/portafolio-web.png',
+    technologies: [
+      'Next.js 16',
+      'React 19',
+      'TypeScript',
+      'Tailwind CSS v4',
+      'Node.js',
+      'Turbopack',
+      'PostCSS',
+      'ESLint',
+      'Git'
+    ],
+    category: 'spa',
+    status: 'completed',
+    featured: true,
+    dateCompleted: '2025-11-14',
+    duration: '2 semanas',
+    links: [
+      {
+        type: 'github',
+        url: 'https://github.com/devdiegodv/portafolio-web',
+        label: 'Ver Código'
+      },
+      {
+        type: 'live',
+        url: 'https://diegodv.dev',
+        label: 'Ver Sitio'
+      }
+    ],
+  },
+
+  {
     id: 'task-management-app',
     title: 'Gestor de Notas Personal',
     description: 'Aplicación web robusta para gestionar y organizar notas personales con autenticación segura, sistema de auditoría completo y contacto profesional integrado.',
