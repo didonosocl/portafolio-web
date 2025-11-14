@@ -52,7 +52,7 @@ portafolio-web/
 
 1. **Clona el repositorio**
    ```bash
-   git clone https://github.com/devdiegodv/portafolio-web.git
+   git clone https://github.com/didonosocl/portafolio-web.git
    cd portafolio-web
    ```
 
@@ -123,21 +123,13 @@ npm run build
 # Los archivos estáticos estarán en la carpeta .next/
 ```
 
-## 🤝 Contribución
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
 ## 👨‍💻 Autor
 
-**Diego** - [@devdiegodv](https://github.com/devdiegodv)
+**Diego Donoso Vera** - [@didonosocl](https://github.com/didonosocl)
 
 ## 🙏 Agradecimientos
 
@@ -146,5 +138,3 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 - [Tailwind CSS](https://tailwindcss.com/) por el sistema de diseño
 
 ---
-
-⭐ ¡Dale una estrella si este proyecto te ayudó!
