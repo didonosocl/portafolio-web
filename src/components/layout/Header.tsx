@@ -71,19 +71,56 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className={cn(
-                  "text-gray-700 hover:text-blue-600 dark:text-gray-300",
-                  "dark:hover:text-blue-400 transition-colors duration-200",
-                  "font-medium text-sm"
-                )}
-              >
-                {item.label}
-              </button>
-            ))}
+            <button
+              onClick={() => scrollToSection('#about')}
+              className={cn(
+                "text-gray-700 hover:text-blue-600 dark:text-gray-300",
+                "dark:hover:text-blue-400 transition-colors duration-200",
+                "font-medium text-sm"
+              )}
+            >
+              Sobre mí
+            </button>
+            <button
+              onClick={() => scrollToSection('#experience')}
+              className={cn(
+                "text-gray-700 hover:text-blue-600 dark:text-gray-300",
+                "dark:hover:text-blue-400 transition-colors duration-200",
+                "font-medium text-sm"
+              )}
+            >
+              Experiencia
+            </button>
+            <button
+              onClick={() => scrollToSection('#skills')}
+              className={cn(
+                "text-gray-700 hover:text-blue-600 dark:text-gray-300",
+                "dark:hover:text-blue-400 transition-colors duration-200",
+                "font-medium text-sm"
+              )}
+            >
+              Habilidades
+            </button>
+            <button
+              onClick={() => scrollToSection('#projects')}
+              className={cn(
+                "text-gray-700 hover:text-blue-600 dark:text-gray-300",
+                "dark:hover:text-blue-400 transition-colors duration-200",
+                "font-medium text-sm"
+              )}
+            >
+              Proyectos
+            </button>
+            <button
+              onClick={() => scrollToSection('#contact')}
+              className={cn(
+                "text-gray-700 hover:text-blue-600 dark:text-gray-300",
+                "dark:hover:text-blue-400 transition-colors duration-200",
+                "font-medium text-sm"
+              )}
+            >
+              Contacto
+            </button>
           </div>
 
           {/* Theme Toggle & Mobile Menu Button */}
@@ -185,18 +222,51 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="md:hidden py-4 bg-white dark:bg-gray-900 border-t 
                         border-gray-200 dark:border-gray-700">
             <div className="flex flex-col space-y-3">
-              {navigation.map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
-                           dark:text-gray-300 dark:hover:text-blue-400 
-                           hover:bg-gray-100 dark:hover:bg-gray-800
-                           transition-colors duration-200 font-medium"
-                >
-                  {item.label}
-                </button>
-              ))}
+              <button
+                onClick={() => scrollToSection('#about')}
+                className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
+                         dark:text-gray-300 dark:hover:text-blue-400 
+                         hover:bg-gray-100 dark:hover:bg-gray-800
+                         transition-colors duration-200 font-medium"
+              >
+                Sobre mí
+              </button>
+              <button
+                onClick={() => scrollToSection('#experience')}
+                className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
+                         dark:text-gray-300 dark:hover:text-blue-400 
+                         hover:bg-gray-100 dark:hover:bg-gray-800
+                         transition-colors duration-200 font-medium"
+              >
+                Experiencia
+              </button>
+              <button
+                onClick={() => scrollToSection('#skills')}
+                className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
+                         dark:text-gray-300 dark:hover:text-blue-400 
+                         hover:bg-gray-100 dark:hover:bg-gray-800
+                         transition-colors duration-200 font-medium"
+              >
+                Habilidades
+              </button>
+              <button
+                onClick={() => scrollToSection('#projects')}
+                className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
+                         dark:text-gray-300 dark:hover:text-blue-400 
+                         hover:bg-gray-100 dark:hover:bg-gray-800
+                         transition-colors duration-200 font-medium"
+              >
+                Proyectos
+              </button>
+              <button
+                onClick={() => scrollToSection('#contact')}
+                className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
+                         dark:text-gray-300 dark:hover:text-blue-400 
+                         hover:bg-gray-100 dark:hover:bg-gray-800
+                         transition-colors duration-200 font-medium"
+              >
+                Contacto
+              </button>
             </div>
           </div>
         )}

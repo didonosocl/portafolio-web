@@ -1,6 +1,6 @@
 'use client';
 
-import { Experience as ExperienceType } from '@/types';
+import { Experience as ExperienceType, Position } from '@/types';
 import { formatExperienceDate, calculateDuration } from '@/data/experience';
 
 interface ExperienceProps {
@@ -9,7 +9,7 @@ interface ExperienceProps {
 
 export default function Experience({ experiences }: ExperienceProps) {
   return (
-    <section id="experience" className="py-16 md:py-24">
+    <section id="experience" className="py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Título de la sección */}
         <div className="text-center mb-16">
@@ -23,8 +23,8 @@ export default function Experience({ experiences }: ExperienceProps) {
         </div>
 
         {/* Timeline de experiencias */}
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-8">
+        <div className="max-w-5xl mx-auto">
+          <div className="space-y-12">
             {experiences.map((experience, index) => (
               <ExperienceCard 
                 key={experience.id} 
@@ -45,29 +45,126 @@ interface ExperienceCardProps {
 }
 
 function ExperienceCard({ experience, isLast }: ExperienceCardProps) {
-  const duration = calculateDuration(experience.startDate, experience.endDate);
-  const startDate = formatExperienceDate(experience.startDate);
-  const endDate = experience.endDate 
-    ? formatExperienceDate(experience.endDate) 
+  const totalDuration = calculateDuration(experience.totalStartDate, experience.totalEndDate);
+  const totalStartDate = formatExperienceDate(experience.totalStartDate);
+  const totalEndDate = experience.totalEndDate 
+    ? formatExperienceDate(experience.totalEndDate) 
     : 'Presente';
 
-  // Mapeo de tipos de empleo a colores
+  return (
+    <div className="relative">
+      {/* Línea del timeline */}
+      {!isLast && (
+        <div className="absolute left-8 md:left-12 top-20 bottom-0 w-0.5 bg-gray-300 dark:bg-gray-600" />
+      )}
+      
+      {/* Tarjeta de empresa */}
+      <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
+        
+        {/* Header de la empresa */}
+        <div className="p-6 md:p-8 border-b border-gray-200 dark:border-gray-700">
+          <div className="flex items-start gap-4">
+            {/* Logo de la empresa */}
+            <div className="relative flex-shrink-0">
+              <div className="absolute -left-12 md:-left-16 top-0 w-8 h-8 bg-blue-600 rounded-full border-4 border-white dark:border-gray-900 z-10" />
+              {experience.companyLogo ? (
+                <img
+                  src={experience.companyLogo}
+                  alt={`Logo de ${experience.company}`}
+                  className="w-16 h-16 md:w-20 md:h-20 object-contain rounded-lg bg-white p-2"
+                />
+              ) : (
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-2xl">
+                  {experience.company.charAt(0)}
+                </div>
+              )}
+            </div>
+
+            {/* Info de la empresa */}
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                    {experience.company}
+                    {experience.companyUrl && (
+                      <a
+                        href={experience.companyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ml-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-lg"
+                      >
+                        ↗
+                      </a>
+                    )}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    📍 {experience.location}
+                    {experience.workMode && (
+                      <span className="ml-2">
+                        · {experience.workMode === 'remote' ? 'En remoto' : 
+                           experience.workMode === 'hybrid' ? 'Híbrido' : 
+                           'Presencial'}
+                      </span>
+                    )}
+                  </p>
+                </div>
+                
+                <div className="flex flex-col md:items-end text-sm">
+                  <span className="text-gray-900 dark:text-white font-medium">
+                    {totalStartDate} - {totalEndDate}
+                  </span>
+                  <span className="text-gray-600 dark:text-gray-400">
+                    {totalDuration}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Posiciones dentro de la empresa */}
+        <div className="divide-y divide-gray-200 dark:divide-gray-700">
+          {experience.positions.map((position, index) => (
+            <PositionCard 
+              key={position.id} 
+              position={position} 
+              isFirst={index === 0}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface PositionCardProps {
+  position: Position;
+  isFirst: boolean;
+}
+
+function PositionCard({ position, isFirst }: PositionCardProps) {
+  const duration = calculateDuration(position.startDate, position.endDate);
+  const startDate = formatExperienceDate(position.startDate);
+  const endDate = position.endDate 
+    ? formatExperienceDate(position.endDate) 
+    : 'Presente';
+
   const getEmploymentTypeColor = (type: string) => {
     const colors = {
-      'full-time': 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-      'freelance': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-      'part-time': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-      'contract': 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
-      'internship': 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300'
+      'full-time': 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+      'freelance': 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+      'part-time': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
+      'contract': 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400',
+      'internship': 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
     };
     return colors[type as keyof typeof colors] || colors['full-time'];
   };
 
   const getEmploymentTypeLabel = (type: string) => {
     const labels = {
-      'full-time': 'Tiempo Completo',
+      'full-time': 'Jornada completa',
       'freelance': 'Freelance',
-      'part-time': 'Medio Tiempo',
+      'part-time': 'Medio tiempo',
       'contract': 'Contrato',
       'internship': 'Prácticas'
     };
@@ -75,119 +172,106 @@ function ExperienceCard({ experience, isLast }: ExperienceCardProps) {
   };
 
   return (
-    <div className="relative">
-      {/* Línea del timeline */}
-      {!isLast && (
-        <div className="absolute left-6 top-16 bottom-0 w-px bg-gray-200 dark:bg-gray-700" />
-      )}
-      
-      {/* Tarjeta de experiencia */}
-      <div className="relative bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 ml-0 md:ml-16">
-        {/* Punto del timeline */}
-        <div className="absolute -left-3 md:-left-19 top-8 w-6 h-6 bg-blue-600 rounded-full border-4 border-white dark:border-gray-800" />
-        
-        <div className="flex flex-col md:flex-row md:items-start gap-4">
-          {/* Avatar/Logo de la empresa */}
-          <div className="flex-shrink-0">
-            {experience.companyLogo ? (
-              <img
-                src={experience.companyLogo}
-                alt={`Logo de ${experience.company}`}
-                className="w-16 h-16 object-contain"
-              />
-            ) : (
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
-                {experience.company.charAt(0)}
-              </div>
-            )}
+    <div className="p-6 md:p-8 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+      {/* Header del puesto */}
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
+        <div>
+          <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+            {position.title}
+          </h4>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className={`px-3 py-1 text-xs font-medium rounded-full ${getEmploymentTypeColor(position.type)}`}>
+              {getEmploymentTypeLabel(position.type)}
+            </span>
           </div>
+        </div>
+        
+        <div className="flex flex-col md:items-end text-sm">
+          <span className="text-gray-700 dark:text-gray-300 font-medium">
+            {startDate} - {endDate}
+          </span>
+          <span className="text-gray-500 dark:text-gray-400">
+            {duration}
+          </span>
+        </div>
+      </div>
 
-          {/* Contenido principal */}
-          <div className="flex-1 min-w-0">
-            {/* Header con título y fechas */}
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  {experience.position}
-                </h3>
-                <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-medium">
-                  <span>{experience.company}</span>
-                  {experience.companyUrl && (
-                    <a
-                      href={experience.companyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-500 hover:text-blue-600"
-                    >
-                      ↗
-                    </a>
-                  )}
-                </div>
-              </div>
-              
-              <div className="flex flex-col md:items-end mt-2 md:mt-0">
-                <div className="text-sm text-gray-600 dark:text-gray-300">
-                  {startDate} - {endDate}
-                </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">
-                  {duration}
-                </div>
-              </div>
-            </div>
+      {/* Descripción */}
+      <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+        {position.description}
+      </p>
 
-            {/* Tipo de empleo y ubicación */}
-            <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className={`px-2 py-1 text-xs font-medium rounded-full ${getEmploymentTypeColor(experience.type)}`}>
-                {getEmploymentTypeLabel(experience.type)}
-              </span>
-              <span className="text-sm text-gray-600 dark:text-gray-300">
-                📍 {experience.location}
-              </span>
-            </div>
-
-            {/* Descripción */}
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
-              {experience.description}
-            </p>
-
-            {/* Responsabilidades */}
-            {experience.responsibilities && experience.responsibilities.length > 0 && (
-              <div className="mb-4">
-                <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                  Responsabilidades:
-                </h4>
-                <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
-                  {experience.responsibilities.map((responsibility, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="text-blue-600 mr-2 mt-1.5">•</span>
-                      <span>{responsibility}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Tecnologías */}
-            {experience.technologies && experience.technologies.length > 0 && (
-              <div>
-                <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                  Tecnologías utilizadas:
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {experience.technologies.map((tech) => (
+      {/* Proyectos (si existen) */}
+      {position.projects && position.projects.length > 0 && (
+        <div className="mb-4 space-y-3">
+          {position.projects.map((project, projIdx) => (
+            <div
+              key={projIdx}
+              className="pl-4 border-l-2 border-blue-300 dark:border-blue-700 bg-blue-50/30 dark:bg-blue-900/10 rounded-r-lg p-3"
+            >
+              <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+                📋 Proyecto: {project.name}
+              </h5>
+              {project.period && (
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                  📅 {project.period}
+                </p>
+              )}
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                {project.description}
+              </p>
+              {project.technologies && project.technologies.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
+                  {project.technologies.map((tech, techIdx) => (
                     <span
-                      key={tech}
-                      className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md"
+                      key={techIdx}
+                      className="px-2 py-0.5 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded text-xs border border-gray-200 dark:border-gray-700"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-              </div>
-            )}
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Responsabilidades */}
+      {position.responsibilities && position.responsibilities.length > 0 && (
+        <div className="mb-4">
+          <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
+            Responsabilidades:
+          </h5>
+          <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1.5">
+            {position.responsibilities.map((responsibility, index) => (
+              <li key={index} className="flex items-start">
+                <span className="text-blue-600 dark:text-blue-400 mr-2 mt-0.5 flex-shrink-0">•</span>
+                <span>{responsibility}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Tecnologías */}
+      {position.technologies && position.technologies.length > 0 && (
+        <div>
+          <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
+            Tecnologías:
+          </h5>
+          <div className="flex flex-wrap gap-2">
+            {position.technologies.map((tech) => (
+              <span
+                key={tech}
+                className="px-3 py-1 text-xs font-medium bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-md border border-blue-200 dark:border-blue-800"
+              >
+                {tech}
+              </span>
+            ))}
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -123,21 +123,43 @@ export type SkillLevel =
   | 'expert';
 
 /**
- * Experiencia laboral
+ * Proyecto dentro de una posición
  */
-export interface Experience {
+export interface WorkProject {
+  name: string;
+  period?: string; // ej: "octubre 2025 - Actualidad"
+  description: string;
+  technologies?: string[];
+}
+
+/**
+ * Posición/Rol dentro de una empresa
+ */
+export interface Position {
   id: string;
-  company: string;
-  position: string;
-  location: string;
+  title: string;
   type: EmploymentType;
   startDate: string;
   endDate?: string; // undefined si es trabajo actual
   description: string;
   responsibilities: string[];
   technologies: string[];
-  companyUrl?: string;
+  projects?: WorkProject[]; // Proyectos específicos dentro de la posición
+}
+
+/**
+ * Experiencia laboral (agrupa múltiples posiciones por empresa)
+ */
+export interface Experience {
+  id: string;
+  company: string;
   companyLogo?: string;
+  companyUrl?: string;
+  location: string;
+  workMode?: 'remote' | 'hybrid' | 'on-site'; // Modalidad de trabajo
+  positions: Position[]; // Múltiples roles en la misma empresa
+  totalStartDate: string; // Fecha de inicio en la empresa
+  totalEndDate?: string; // Fecha de salida (undefined si sigue trabajando)
 }
 
 /**
