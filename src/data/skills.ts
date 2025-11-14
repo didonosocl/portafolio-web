@@ -160,22 +160,6 @@ export const skills: Skill[] = [
     description: 'S3, Lambda, EC2, y servicios básicos de cloud computing.'
   },
 
-  // Mobile Development
-  {
-    name: 'React Native',
-    category: 'mobile',
-    level: 'intermediate',
-    experience: '1 año',
-    description: 'Desarrollo cross-platform, navegación, y integración con APIs nativas.'
-  },
-  {
-    name: 'Expo',
-    category: 'mobile',
-    level: 'intermediate',
-    experience: '1 año',
-    description: 'Desarrollo rápido, build automático, y distribución de apps.'
-  },
-
   // Design & UI/UX
   {
     name: 'Figma',

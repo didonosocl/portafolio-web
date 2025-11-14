@@ -45,7 +45,6 @@ export interface Project {
   dateCompleted: string;
   duration?: string;
   team?: TeamMember[];
-  challenges?: string[];
   learnings?: string[];
 }
 
@@ -54,10 +53,9 @@ export interface Project {
  */
 export type ProjectCategory = 
   | 'web-app' 
-  | 'mobile-app' 
+  | 'spa'
   | 'desktop-app' 
   | 'api' 
-  | 'library' 
   | 'tool' 
   | 'design' 
   | 'other';
@@ -137,7 +135,6 @@ export interface Experience {
   endDate?: string; // undefined si es trabajo actual
   description: string;
   responsibilities: string[];
-  achievements: string[];
   technologies: string[];
   companyUrl?: string;
   companyLogo?: string;

@@ -62,7 +62,30 @@ export function ThemeProvider({
       effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     
+    // Add the effective theme class to html element
     root.classList.add(effectiveTheme);
+    
+    // Also set data attribute for better compatibility
+    root.setAttribute('data-theme', effectiveTheme);
+    
+  }, [theme, mounted]);
+
+  // Listen for system theme changes when in system mode
+  useEffect(() => {
+    if (!mounted || theme !== 'system') return;
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const handleChange = () => {
+      const root = window.document.documentElement;
+      root.classList.remove('light', 'dark');
+      const newTheme = mediaQuery.matches ? 'dark' : 'light';
+      root.classList.add(newTheme);
+      root.setAttribute('data-theme', newTheme);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, [theme, mounted]);
 
   const value = {

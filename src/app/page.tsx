@@ -7,6 +7,7 @@ import Contact from '@/components/sections/Contact';
 import { personalInfo, navigation, aboutInfo } from '@/data/personal';
 import { projects } from '@/data/projects';
 import { experiences } from '@/data/experience';
+import { getTechIcon } from '@/lib/techIcons';
 
 /**
  * Página principal del portafolio personal
@@ -96,13 +97,15 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {[
               'Python', 'Django', 'React', 'Angular', 
-              'PostgreSQL', 'Docker', 'Azure Cloud', 'PyTorch',
-              'YOLO', 'OpenCV', 'Flask', 'JavaScript',
-              'CSS', 'HTML', 'Linux', 'Git'
+              'PostgreSQL', 'MongoDB', 'Oracle', 'Docker', 
+              'Azure Cloud', 'PyTorch', 'YOLO', 'OpenCV', 
+              'Flask', 'JavaScript', 'CSS', 'HTML', 'Node', 'Git'
             ].map((skill) => (
-              <div key={skill} className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm text-center">
-                {/* Icono temporal - TODO: Reemplazar por iconos específicos */}
-                <div className="text-2xl mb-2">⚡</div>
+              <div key={skill} className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm text-center hover:shadow-md transition-shadow">
+                <div 
+                  className="w-12 h-12 mx-auto mb-3"
+                  dangerouslySetInnerHTML={{ __html: getTechIcon(skill) }}
+                />
                 <div className="font-medium text-gray-900 dark:text-white">{skill}</div>
               </div>
             ))}
@@ -137,7 +140,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-gray-400">
-              © 2024 {personalInfo.name}. Hecho con ❤️ usando Next.js y Tailwind CSS.
+              © 2025 {personalInfo.name}.
             </p>
           </div>
         </div>
