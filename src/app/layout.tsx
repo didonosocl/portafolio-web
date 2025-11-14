@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     images: [siteConfig.image],
-    creator: '@didonoso',
+    creator: '@didonosocl',
   },
   
   // Additional metadata
