@@ -53,6 +53,7 @@ export interface Project {
  */
 export type ProjectCategory = 
   | 'web-app' 
+  | 'spa'
   | 'desktop-app' 
   | 'api' 
   | 'tool' 
