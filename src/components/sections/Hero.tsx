@@ -5,6 +5,7 @@ import { Container, Section } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { PersonalInfo } from '@/types';
 import NoSSR from '@/components/ui/NoSSR';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface HeroProps {
   personalInfo: PersonalInfo;
@@ -15,6 +16,7 @@ interface HeroProps {
  * Presenta la información principal del portafolio
  */
 export const Hero: React.FC<HeroProps> = ({ personalInfo }) => {
+  const { t } = useLanguage();
   
   const scrollToSection = (sectionId: string) => {
     if (typeof window !== 'undefined') {
@@ -41,7 +43,7 @@ export const Hero: React.FC<HeroProps> = ({ personalInfo }) => {
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full">
                 <span className="text-2xl">👋</span>
                 <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
-                  ¡Hola! Soy
+                  {t('hero.greeting')}
                 </span>
               </div>
 
@@ -51,13 +53,13 @@ export const Hero: React.FC<HeroProps> = ({ personalInfo }) => {
                   {personalInfo.name}
                 </h1>
                 <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-blue-600 dark:text-blue-400 mt-2">
-                  {personalInfo.title}
+                  {t('hero.title')}
                 </h2>
               </div>
 
               {/* Description */}
               <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">
-                {personalInfo.description}
+                {t('hero.description')}
               </p>
 
               {/* Location */}
@@ -83,7 +85,7 @@ export const Hero: React.FC<HeroProps> = ({ personalInfo }) => {
                     </svg>
                   }
                 >
-                  Contáctame
+                  {t('hero.contactMe')}
                 </Button>
                 
                 <Button 
@@ -97,7 +99,7 @@ export const Hero: React.FC<HeroProps> = ({ personalInfo }) => {
                     </svg>
                   }
                 >
-                  Ver Proyectos
+                  {t('projects.title')}
                 </Button>
 
                 {personalInfo.resume && (
@@ -112,7 +114,7 @@ export const Hero: React.FC<HeroProps> = ({ personalInfo }) => {
                       </svg>
                     }
                   >
-                    Descargar CV
+                    {t('hero.downloadCV')}
                   </Button>
                 )}
               </div>

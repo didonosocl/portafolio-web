@@ -5,6 +5,7 @@ import { Container, Section } from '@/components/ui/Container';
 import { Card, Badge, Button } from '@/components/ui/Button';
 import { OptimizedProjectImage } from '@/components/ui/OptimizedProjectImage';
 import { Project, ProjectCategory } from '@/types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ProjectsProps {
   projects: Project[];
@@ -15,6 +16,7 @@ interface ProjectsProps {
  * Muestra los proyectos del portafolio con filtros y detalles
  */
 export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'all'>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -25,14 +27,14 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   ];
 
   const categoryLabels: Record<ProjectCategory | 'all', string> = {
-    all: 'Todos',
-    'web-app': 'Web Apps',
-    'spa': 'Single Page Apps',
-    'desktop-app': 'Apps Desktop',
-    'api': 'APIs',
-    'tool': 'Herramientas',
-    'design': 'Diseño',
-    'other': 'Otros'
+    all: t('projects.all'),
+    'web-app': t('projects.categories.web-app'),
+    'spa': t('projects.categories.spa'),
+    'desktop-app': t('projects.categories.desktop-app'),
+    'api': t('projects.categories.api'),
+    'tool': t('projects.categories.tool'),
+    'design': t('projects.categories.design'),
+    'other': t('projects.categories.other')
   };
 
   // Filtrar proyectos

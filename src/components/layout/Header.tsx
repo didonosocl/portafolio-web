@@ -5,6 +5,7 @@ import { Container } from '@/components/ui/Container';
 import { NavigationItem } from '@/types';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/components/theme-provider';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface HeaderProps {
   navigation: NavigationItem[];
@@ -25,6 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,23 +73,76 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className={cn(
-                  "text-gray-700 hover:text-blue-600 dark:text-gray-300",
-                  "dark:hover:text-blue-400 transition-colors duration-200",
-                  "font-medium text-sm"
-                )}
-              >
-                {item.label}
-              </button>
-            ))}
+            <button
+              onClick={() => scrollToSection('#about')}
+              className={cn(
+                "text-gray-700 hover:text-blue-600 dark:text-gray-300",
+                "dark:hover:text-blue-400 transition-colors duration-200",
+                "font-medium text-sm"
+              )}
+            >
+              {t('nav.about')}
+            </button>
+            <button
+              onClick={() => scrollToSection('#experience')}
+              className={cn(
+                "text-gray-700 hover:text-blue-600 dark:text-gray-300",
+                "dark:hover:text-blue-400 transition-colors duration-200",
+                "font-medium text-sm"
+              )}
+            >
+              {t('nav.experience')}
+            </button>
+            <button
+              onClick={() => scrollToSection('#skills')}
+              className={cn(
+                "text-gray-700 hover:text-blue-600 dark:text-gray-300",
+                "dark:hover:text-blue-400 transition-colors duration-200",
+                "font-medium text-sm"
+              )}
+            >
+              {t('nav.skills')}
+            </button>
+            <button
+              onClick={() => scrollToSection('#projects')}
+              className={cn(
+                "text-gray-700 hover:text-blue-600 dark:text-gray-300",
+                "dark:hover:text-blue-400 transition-colors duration-200",
+                "font-medium text-sm"
+              )}
+            >
+              {t('nav.projects')}
+            </button>
+            <button
+              onClick={() => scrollToSection('#contact')}
+              className={cn(
+                "text-gray-700 hover:text-blue-600 dark:text-gray-300",
+                "dark:hover:text-blue-400 transition-colors duration-200",
+                "font-medium text-sm"
+              )}
+            >
+              {t('nav.contact')}
+            </button>
           </div>
 
-          {/* Theme Toggle & Mobile Menu Button */}
+          {/* Language Toggle, Theme Toggle & Mobile Menu Button */}
           <div className="flex items-center gap-4">
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
+              className={cn(
+                "p-2 rounded-lg text-gray-700 hover:text-blue-600",
+                "dark:text-gray-300 dark:hover:text-blue-400",
+                "hover:bg-gray-100 dark:hover:bg-gray-800",
+                "transition-colors duration-200 font-semibold text-sm"
+              )}
+              aria-label="Toggle language"
+              title={`Idioma: ${language === 'es' ? 'Español' : 'English'}`}
+            >
+              {language === 'es' ? '🇺🇸 EN' : '🇪🇸 ES'}
+            </button>
+
+            {/* Theme Toggle */}
             <button
               onClick={() => {
                 // Ciclo: system -> light -> dark -> system
@@ -185,18 +240,51 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="md:hidden py-4 bg-white dark:bg-gray-900 border-t 
                         border-gray-200 dark:border-gray-700">
             <div className="flex flex-col space-y-3">
-              {navigation.map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
-                           dark:text-gray-300 dark:hover:text-blue-400 
-                           hover:bg-gray-100 dark:hover:bg-gray-800
-                           transition-colors duration-200 font-medium"
-                >
-                  {item.label}
-                </button>
-              ))}
+              <button
+                onClick={() => scrollToSection('#about')}
+                className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
+                         dark:text-gray-300 dark:hover:text-blue-400 
+                         hover:bg-gray-100 dark:hover:bg-gray-800
+                         transition-colors duration-200 font-medium"
+              >
+                {t('nav.about')}
+              </button>
+              <button
+                onClick={() => scrollToSection('#experience')}
+                className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
+                         dark:text-gray-300 dark:hover:text-blue-400 
+                         hover:bg-gray-100 dark:hover:bg-gray-800
+                         transition-colors duration-200 font-medium"
+              >
+                {t('nav.experience')}
+              </button>
+              <button
+                onClick={() => scrollToSection('#skills')}
+                className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
+                         dark:text-gray-300 dark:hover:text-blue-400 
+                         hover:bg-gray-100 dark:hover:bg-gray-800
+                         transition-colors duration-200 font-medium"
+              >
+                {t('nav.skills')}
+              </button>
+              <button
+                onClick={() => scrollToSection('#projects')}
+                className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
+                         dark:text-gray-300 dark:hover:text-blue-400 
+                         hover:bg-gray-100 dark:hover:bg-gray-800
+                         transition-colors duration-200 font-medium"
+              >
+                {t('nav.projects')}
+              </button>
+              <button
+                onClick={() => scrollToSection('#contact')}
+                className="text-left px-4 py-2 text-gray-700 hover:text-blue-600 
+                         dark:text-gray-300 dark:hover:text-blue-400 
+                         hover:bg-gray-100 dark:hover:bg-gray-800
+                         transition-colors duration-200 font-medium"
+              >
+                {t('nav.contact')}
+              </button>
             </div>
           </div>
         )}

@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import { Container, Section } from '@/components/ui/Container';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface AboutProps {
   description: string;
@@ -16,6 +19,8 @@ export const About: React.FC<AboutProps> = ({
   highlights = [],
   image 
 }) => {
+  const { t } = useLanguage();
+  
   return (
     <Section id="about" background="muted">
       <Container>
@@ -24,7 +29,7 @@ export const About: React.FC<AboutProps> = ({
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Acerca de mí
+              {t('about.title')}
             </h2>
             <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full" />
           </div>
@@ -35,27 +40,25 @@ export const About: React.FC<AboutProps> = ({
             <div className="space-y-6">
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {description}
+                  {t('about.description')}
                 </p>
               </div>
 
-              {highlights.length > 0 && (
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    Lo que me destaca:
-                  </h3>
-                  <ul className="space-y-3">
-                    {highlights.map((highlight, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-gray-600 dark:text-gray-300">
-                          {highlight}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  {t('about.highlights')}
+                </h3>
+                <ul className="space-y-3">
+                  {(t('about.highlightsList') as unknown as string[]).map((highlight, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-gray-600 dark:text-gray-300">
+                        {highlight}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               {/* Stats or additional info could go here */}
               <div className="grid grid-cols-2 gap-6 pt-6">
@@ -64,7 +67,7 @@ export const About: React.FC<AboutProps> = ({
                     3+
                   </div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
-                    Años de experiencia
+                    {t('about.yearsExperience')}
                   </div>
                 </div>
                 <div className="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
@@ -72,7 +75,7 @@ export const About: React.FC<AboutProps> = ({
                     20+
                   </div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
-                    Proyectos completados
+                    {t('about.projectsCompleted')}
                   </div>
                 </div>
               </div>
@@ -88,8 +91,7 @@ export const About: React.FC<AboutProps> = ({
                     className="w-full rounded-2xl shadow-2xl"
                   />
                   {/* Decorative elements */}
-                  <div className="absolute -bottom-6 -right-6 w-full h-full 
-                                border-2 border-blue-600 rounded-2xl -z-10" />
+                  <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-blue-600 rounded-2xl -z-10" />
                 </div>
               ) : (
                 /* Placeholder with icon */

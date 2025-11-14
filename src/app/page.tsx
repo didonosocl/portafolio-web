@@ -3,6 +3,7 @@ import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import ProjectsClient from '@/components/sections/ProjectsClient';
 import Experience from '@/components/sections/Experience';
+import Skills from '@/components/sections/Skills';
 import Contact from '@/components/sections/Contact';
 import { personalInfo, navigation, aboutInfo } from '@/data/personal';
 import { projects } from '@/data/projects';
@@ -63,63 +64,35 @@ export default function Home() {
       />
 
       {/* 
-        PROJECTS SECTION
-        Galería de proyectos desarrollados renderizada del lado del cliente.
-        Utiliza ProjectsClient para manejar interacciones y animaciones.
-        Los datos se cargan desde @/data/projects.ts
-      */}
-      <ProjectsClient projects={projects} />
-
-      {/* 
-        SKILLS SECTION - TEMPORAL
-        Grid responsive de habilidades técnicas con diseño de tarjetas.
-        
-        TODO: Migrar a un componente separado y cargar datos desde @/data/skills.ts
-        TODO: Añadir iconos específicos para cada tecnología
-        TODO: Implementar niveles de competencia o años de experiencia
-        
-        Layout responsivo:
-        - Móvil: 2 columnas
-        - Tablet: 4 columnas  
-        - Desktop: 6 columnas
-      */}
-      <section id="skills" className="py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Título de la sección con línea decorativa */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Habilidades Técnicas
-            </h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full" />
-          </div>
-          
-          {/* Grid de habilidades - Datos hardcodeados temporalmente */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {[
-              'Python', 'Django', 'React', 'Angular', 
-              'PostgreSQL', 'MongoDB', 'Oracle', 'Docker', 
-              'Azure Cloud', 'PyTorch', 'YOLO', 'OpenCV', 
-              'Flask', 'JavaScript', 'CSS', 'HTML', 'Node', 'Git'
-            ].map((skill) => (
-              <div key={skill} className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm text-center hover:shadow-md transition-shadow">
-                <div 
-                  className="w-12 h-12 mx-auto mb-3"
-                  dangerouslySetInnerHTML={{ __html: getTechIcon(skill) }}
-                />
-                <div className="font-medium text-gray-900 dark:text-white">{skill}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 
         EXPERIENCE SECTION
         Sección de experiencia profesional con timeline interactivo.
         Renderiza todas las experiencias desde @/data/experience.ts
         Incluye responsabilidades, logros y tecnologías para cada posición.
       */}
       <Experience experiences={experiences} />
+
+      {/* 
+        SKILLS SECTION
+        Carrusel infinito de habilidades técnicas con animación automática.
+        - Movimiento continuo de derecha a izquierda
+        - Pausa al hacer hover sobre una tecnología
+        - Efecto de zoom en la card al pasar el mouse
+        Las tecnologías se cargan como array de strings.
+      */}
+      <Skills skills={[
+        'Python', 'Django', 'React', 'Angular', 
+        'PostgreSQL', 'MongoDB', 'Oracle', 'Docker', 
+        'Azure', 'PyTorch', 'YOLO', 'OpenCV', 
+        'Flask', 'JavaScript', 'CSS', 'HTML', 'Node.js', 'Git'
+      ]} />
+
+      {/* 
+        PROJECTS SECTION
+        Galería de proyectos desarrollados renderizada del lado del cliente.
+        Utiliza ProjectsClient para manejar interacciones y animaciones.
+        Los datos se cargan desde @/data/projects.ts
+      */}
+      <ProjectsClient projects={projects} />
 
       {/* 
         CONTACT SECTION
