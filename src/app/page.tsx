@@ -137,7 +137,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-gray-400">
-              © 2025 {personalInfo.name}. Hecho con ❤️ usando Next.js y Tailwind CSS.
+              © 2025 {personalInfo.name}.
             </p>
           </div>
         </div>
